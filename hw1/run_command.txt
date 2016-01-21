@@ -1,0 +1,6 @@
+Natalie Price-Jones, Jan 2016
+
+The following command was used to run the executable 
+produced by the command in compile_command.txt:
+
+./firstprogram

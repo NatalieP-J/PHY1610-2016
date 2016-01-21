@@ -1,0 +1,6 @@
+Natalie Price-Jones, Jan 2016
+
+The following compilation command was used, compiling 
+firstprogram.cc into executable firstprogram using c++11:
+
+g++ -std=c++11 -o firstprogram firstprogram.cc
