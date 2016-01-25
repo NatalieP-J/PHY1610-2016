@@ -12,17 +12,16 @@ int main()
     const int tabdim = 4; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
 
-    //float number_of_ants[tabdim][tabdim];
-    //float new_number_of_ants[tabdim][tabdim];
-    //float velocity_of_ants[tabdim][tabdim];
-
-    //rarray<float,2> number_of_ants(tabdim,tabdim);
+    // initialize arrays
     rarray<float,2> number_of_ants(tabdim,tabdim);
     number_of_ants = arrayfill(corner, tabdim, tabdim, zerofill);
+    
     rarray<float,2> new_number_of_ants(tabdim,tabdim);
+    
     rarray<float,2> velocity_of_ants(tabdim,tabdim);
+    velocity_of_ants = arrayfill(corner,tabdim,tabdim,velocityfill);
 
-    std::cout << number_of_ants << std::endl;
+    std::cout << velocity_of_ants << std::endl;
 
     const int total_ants = 1010; // initial number of ants
     
@@ -32,6 +31,9 @@ int main()
             velocity_of_ants[i][j] = M_PI*(sin((2*M_PI*(i+j))/tabdim*10)+1);
         }
     }
+
+    std::cout << velocity_of_ants << std::endl;
+
     int n = 0;
     float z = 0;
     for (int i=corner;i<tabdim;i++) {
