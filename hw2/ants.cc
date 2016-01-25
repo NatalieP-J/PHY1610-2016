@@ -9,7 +9,7 @@
 int main()
 {
     // ants walk on a table
-    const int tabdim = 365; // dimension of the grid on the table
+    const int tabdim = 4; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
 
     //float number_of_ants[tabdim][tabdim];
@@ -21,6 +21,8 @@ int main()
     number_of_ants = arrayfill(corner, tabdim, tabdim, zerofill);
     rarray<float,2> new_number_of_ants(tabdim,tabdim);
     rarray<float,2> velocity_of_ants(tabdim,tabdim);
+
+    std::cout << number_of_ants << std::endl;
 
     const int total_ants = 1010; // initial number of ants
     
