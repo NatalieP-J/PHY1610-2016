@@ -37,8 +37,12 @@ int main()
             }
         }
     }
+
+    const int tstart = 0;
+    const int tstop = 40;
+
     // run simulation
-    for (int t = 0; t < 40; t++) {
+    for (int t = tstart; t < tstop; t++) {
         float totants = 0.0;
         for (int i=0;i<tabdim;i++) {
             for (int j=0;j<tabdim;j++) {
