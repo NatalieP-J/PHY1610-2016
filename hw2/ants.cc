@@ -11,7 +11,7 @@ int main()
     // ants walk on a table
     const int tabdim = 365; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
-    const int total_ants = 1010; // initial number of ants
+    int total_ants = 1010; // initial number of ants
 
     // initialize arrays
     rarray<float,2> number_of_ants(tabdim,tabdim);
@@ -25,11 +25,7 @@ int main()
 
     int n = 0;
     float z = 0;
-    for (int i=corner;i<tabdim;i++) {
-        for (int j=corner;j<tabdim;j++) {
-            number_of_ants[i][j] = 0.0;
-        }
-    }
+
     while (n < total_ants) {
         for (int i=corner;i<tabdim;i++) {
             for (int j=corner;j<tabdim;j++) {
