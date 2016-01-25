@@ -1,5 +1,9 @@
 // rex.cc
-#include <rarray> #include <rarrayio> #include <iostream> int main() {
+#include <rarray> 
+#include <rarrayio> 
+#include <iostream> 
+
+int main() {
   const int n = 3;
   rarray<double,3> a(n,n,n);
   a.fill(4);
