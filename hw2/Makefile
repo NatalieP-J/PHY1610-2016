@@ -5,8 +5,8 @@ CPP = g++
 
 all: ants
 
-ants: ants.o arrayfill.o
-	${CPP} arrayfill.o ants.o -o ants
+ants: ants.o arrayfill.o moveants.o
+	${CPP} arrayfill.o ants.o moveants.o -o ants
 
 ants.o: ants.cc
 	${CPP} ants.cc -c -o ants.o
@@ -14,5 +14,8 @@ ants.o: ants.cc
 arrayfill.o: arrayfill.cc
 	${CPP} arrayfill.cc -c -o arrayfill.o
 
+moveants.o: moveants.cc
+	${CPP} moveants.cc -c -o moveants.o
+
 clean:
-	rm arrayfill.o ants.o ants
+	rm arrayfill.o moveants.o ants.o ants

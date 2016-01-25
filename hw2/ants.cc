@@ -1,6 +1,7 @@
 //why can there be a fractional number of ants left on the table?
 
 #include "arrayfill.h"
+#include "moveants.h"
 #include <cmath>
 #include <iostream>
 #include <rarray>
@@ -43,18 +44,13 @@ int main()
 
     // run simulation
     for (int t = tstart; t < tstop; t++) {
-        float totants = 0.0;
-        for (int i=0;i<tabdim;i++) {
-            for (int j=0;j<tabdim;j++) {
-                totants += number_of_ants[i][j];
-            }
-        }
+        
+        new_number_of_ants = arrayfill(corner,tabdim,tabdim,zerofill);
+        
+        float totants = sumants(tabdim,tabdim,number_of_ants);
+        
         std::cout << t<< " " << totants << std::endl;
-        for (int i=corner;i<tabdim;i++) {
-            for (int j=corner;j<tabdim;j++) {
-                new_number_of_ants[i][j] = 0.0;
-            }
-        }
+
         for (int i=corner;i<tabdim;i++) {
             for (int j=corner;j<tabdim;j++) {
                 int di = 1.9*sin(velocity_of_ants[i][j]);
