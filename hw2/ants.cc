@@ -16,7 +16,9 @@ int main()
     //float new_number_of_ants[tabdim][tabdim];
     //float velocity_of_ants[tabdim][tabdim];
 
+    //rarray<float,2> number_of_ants(tabdim,tabdim);
     rarray<float,2> number_of_ants(tabdim,tabdim);
+    number_of_ants = arrayfill(corner, tabdim, tabdim, zerofill);
     rarray<float,2> new_number_of_ants(tabdim,tabdim);
     rarray<float,2> velocity_of_ants(tabdim,tabdim);
 
