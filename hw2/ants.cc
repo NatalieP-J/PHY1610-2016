@@ -2,15 +2,21 @@
 
 #include <cmath>
 #include <iostream>
+#include <rarray>
 int main()
 {
     // ants walk on a table
     const int tabdim = 365; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
 
-    float number_of_ants[tabdim][tabdim];
-    float new_number_of_ants[tabdim][tabdim];
-    float velocity_of_ants[tabdim][tabdim];
+    //float number_of_ants[tabdim][tabdim];
+    //float new_number_of_ants[tabdim][tabdim];
+    //float velocity_of_ants[tabdim][tabdim];
+
+    rarray<float,2> number_of_ants(tabdim,tabdim);
+    rarray<float,2> new_number_of_ants(tabdim,tabdim);
+    rarray<float,2> velocity_of_ants(tabdim,tabdim);
+
     const int total_ants = 1010; // initial number of ants
     
     // initialize
