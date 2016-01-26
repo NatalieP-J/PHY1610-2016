@@ -49,3 +49,17 @@ float sumants(int nrows, int ncols,float totants,rarray<float,2> antarray){
     }
     return totants;
 }
+
+void timestep_output(int t, int nrows, int ncols, rarray<float,2> antarray){
+    float startants = 0.0;
+    float totants = sumants(nrows,ncols,startants,antarray);
+    std::cout << t<< " " << totants << std::endl;
+
+}
+
+rarray<float,2> timestep(int t,int start, int nrows, int ncols, float frac_move, float velocity_amplitude,rarray<float,2> antarray,rarray<float,2> antvelocity){
+    timestep_output(t,nrows,ncols,antarray);
+    rarray<float,2> new_antarray=moveants(start,nrows,ncols,frac_move,velocity_amplitude,antarray,antvelocity);
+    return new_antarray;   
+}
+

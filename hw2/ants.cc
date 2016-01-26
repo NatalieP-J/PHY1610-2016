@@ -38,16 +38,10 @@ int main()
 
     // run simulation
     for (int t = tstart; t < tstop; t++) {
-        
-        float startants = 0.0;
-        float totants = sumants(tabdim,tabdim,startants,number_of_ants);
-        
-        std::cout << t<< " " << totants << std::endl;
 
-        new_number_of_ants = moveants(corner,tabdim,tabdim,frac_move,velocity_amplitude,number_of_ants,velocity_of_ants);
+        new_number_of_ants = timestep(t,corner,tabdim,tabdim,frac_move,velocity_amplitude,number_of_ants,velocity_of_ants);
 
         number_of_ants = new_number_of_ants;
-        totants = sumants(tabdim,tabdim,totants,number_of_ants);
 
     }
     return 0;
