@@ -10,9 +10,14 @@
 int main()
 {
     // ants walk on a table
+    // define table parameters
     const int tabdim = 365; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
+    // define parameters
     int total_ants = 1010; // initial number of ants
+    // define time parameters
+    const int tstart = 0;
+    const int tstop = 40;
 
     // initialize arrays
     rarray<float,2> number_of_ants(tabdim,tabdim);
@@ -22,16 +27,9 @@ int main()
     
     rarray<float,2> velocity_of_ants(tabdim,tabdim);
     velocity_of_ants = arrayfill(corner,tabdim,tabdim,velocityfill);
-    
 
-    int n = 0;
-    float z = 0;
-
+    // distribute ants across the table
     number_of_ants = assignants(corner, tabdim, tabdim, total_ants, number_of_ants);
-    
-
-    const int tstart = 0;
-    const int tstop = 40;
 
     // run simulation
     for (int t = tstart; t < tstop; t++) {
