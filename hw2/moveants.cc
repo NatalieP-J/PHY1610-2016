@@ -4,24 +4,6 @@
 #include "arrayfill.h"
 
 
-rarray<float,2> assignants(int start, int nrows, int ncols, float numants, rarray<float,2> antarray){
-    int n = 0;
-    float z = 0;
-
-    while (n < numants) {
-        for (int i=start;i<nrows;i++) {
-            for (int j=start;j<ncols;j++) {
-                z += sin(0.3*(i+j));
-                if (z>1 and n!=numants) {
-                    antarray[i][j] += 1;
-                    n += 1;
-                }
-            }
-        }
-    }
-    return antarray;
-}
-
 rarray<float,2> moveants(int start,int nrows,int ncols, float frac_move,float velocity_amplitude,rarray<float,2> antarray,rarray<float,2> antvelocity){
     rarray<float,2> new_antarray = arrayfill(start,nrows,ncols,zerofill);
     for (int i=start;i<nrows;i++) {

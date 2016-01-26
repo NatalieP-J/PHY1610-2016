@@ -2,6 +2,8 @@
 
 # Choose compiler
 CPP = g++
+CXXFLAGS = -std=c++11 -O2
+
 
 all: ants
 
@@ -9,13 +11,13 @@ ants: ants.o arrayfill.o moveants.o
 	${CPP} arrayfill.o ants.o moveants.o -o ants
 
 ants.o: ants.cc
-	${CPP} ants.cc -c -o ants.o
+	${CPP} ${CXXFLAGS} ants.cc -c -o ants.o
 
 moveants.o: moveants.cc
-	${CPP} moveants.cc -c -o moveants.o
+	${CPP} ${CXXFLAGS} moveants.cc -c -o moveants.o
 
 arrayfill.o: arrayfill.cc
-	${CPP} arrayfill.cc -c -o arrayfill.o
+	${CPP} ${CXXFLAGS} arrayfill.cc -c -o arrayfill.o
 
 clean:
 	rm arrayfill.o moveants.o ants.o ants

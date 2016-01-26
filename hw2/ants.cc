@@ -6,6 +6,7 @@
 #include <iostream>
 #include <rarray>
 #include <rarrayio>
+#include <tuple>
 
 int main()
 {
@@ -23,17 +24,15 @@ int main()
     const int tstart = 0;
     const int tstop = 40;
 
-    // initialize arrays
-    rarray<float,2> number_of_ants(tabdim,tabdim);
-    number_of_ants = arrayfill(corner, tabdim, tabdim, zerofill);
-    
-    rarray<float,2> new_number_of_ants(tabdim,tabdim);
-    
-    rarray<float,2> velocity_of_ants(tabdim,tabdim);
-    velocity_of_ants = arrayfill(corner,tabdim,tabdim,velocityfill);
+    //initialize arrays (and return them to avoid use of global variables)
+    std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays = initialize(corner,tabdim,tabdim,total_ants);
 
-    // distribute ants across the table
-    number_of_ants = assignants(corner, tabdim, tabdim, total_ants, number_of_ants);
+    //extract results from returned tuple
+    rarray<float,2> number_of_ants = std::get<0>(arrays);
+
+    rarray<float,2> new_number_of_ants = std::get<1>(arrays);
+
+    rarray<float,2> velocity_of_ants = std::get<2>(arrays);
 
 
     // run simulation
