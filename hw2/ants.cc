@@ -11,13 +11,14 @@ int main()
 {
     // ants walk on a table
     // define table parameters
-    const int tabdim = 365; // dimension of the grid on the table
+    const int tabdim = 356; // dimension of the grid on the table
     const int corner = 0; // index of first table grid element
     
     // define ant parameters
     int total_ants = 1010; // initial number of ants
-    int frac_move = 0.2; // fraction of ants that move
-    
+    float frac_move = 0.2; // fraction of ants that move
+    float velocity_amplitude=1.9;
+
     // define time parameters
     const int tstart = 0;
     const int tstop = 40;
@@ -26,7 +27,7 @@ int main()
     rarray<float,2> number_of_ants(tabdim,tabdim);
     number_of_ants = arrayfill(corner, tabdim, tabdim, zerofill);
     
-    //rarray<float,2> new_number_of_ants(tabdim,tabdim);
+    rarray<float,2> new_number_of_ants(tabdim,tabdim);
     
     rarray<float,2> velocity_of_ants(tabdim,tabdim);
     velocity_of_ants = arrayfill(corner,tabdim,tabdim,velocityfill);
@@ -38,15 +39,15 @@ int main()
     // run simulation
     for (int t = tstart; t < tstop; t++) {
         
-        float totants = sumants(tabdim,tabdim,number_of_ants);
-
+        float startants = 0.0;
+        float totants = sumants(tabdim,tabdim,startants,number_of_ants);
         
         std::cout << t<< " " << totants << std::endl;
 
-        rarray<float,2> new_number_of_ants = moveants(corner,tabdim,tabdim,frac_move,number_of_ants,velocity_of_ants);
-
+        new_number_of_ants = moveants(corner,tabdim,tabdim,frac_move,velocity_amplitude,number_of_ants,velocity_of_ants);
 
         number_of_ants = new_number_of_ants;
+        totants = sumants(tabdim,tabdim,totants,number_of_ants);
 
     }
     return 0;

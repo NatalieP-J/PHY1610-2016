@@ -22,19 +22,18 @@ rarray<float,2> assignants(int start, int nrows, int ncols, float numants, rarra
     return antarray;
 }
 
-rarray<float,2> moveants(int start,int nrows,int ncols, float frac_move,rarray<float,2> antarray,rarray<float,2> antvelocity){
+rarray<float,2> moveants(int start,int nrows,int ncols, float frac_move,float velocity_amplitude,rarray<float,2> antarray,rarray<float,2> antvelocity){
     rarray<float,2> new_antarray = arrayfill(start,nrows,ncols,zerofill);
     for (int i=start;i<nrows;i++) {
             for (int j=start;j<ncols;j++) {
-                int di = 1.9*sin(antvelocity[i][j]);
-                int dj = 1.9*cos(antvelocity[i][j]);
+                int di = velocity_amplitude*sin(antvelocity[i][j]);
+                int dj = velocity_amplitude*cos(antvelocity[i][j]);
                 int i2 = i + di;
                 int j2 = j + dj;
                 // some ants do not walk
-                //new_antarray[i2][j2]+=0.8*antarray[i][j];
                 new_antarray[i][j]+=(1-frac_move)*antarray[i][j];
                 // the rest of the ants walk, but some fall of the table
-                if (i2<start and i2>=nrows and j2<start and j2>=ncols) {
+                if (i2>=start and i2<nrows and j2>=start and j2<ncols) {
                     new_antarray[i2][j2]+=frac_move*antarray[i][j];
                 }
             }
@@ -42,8 +41,7 @@ rarray<float,2> moveants(int start,int nrows,int ncols, float frac_move,rarray<f
     return new_antarray;
 }
 
-float sumants(int nrows, int ncols,rarray<float,2> antarray){
-    float totants = 0.0;
+float sumants(int nrows, int ncols,float totants,rarray<float,2> antarray){
     for (int i=0;i<nrows;i++) {
         for (int j=0;j<ncols;j++) {
             totants += antarray[i][j];
