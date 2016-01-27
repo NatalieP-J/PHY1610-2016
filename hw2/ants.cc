@@ -1,12 +1,16 @@
-//why can there be a fractional number of ants left on the table?
+// Natalie Price-Jones Jan 2016
 
-#include "arrayfill.h" // contains arrayfill, zerofill, velocityfill
-#include "moveants.h" // contains assignants, sumants, moveants
+// standard modules
 #include <cmath>
 #include <iostream>
 #include <rarray>
-#include <rarrayio>
-#include <tuple>
+#include <tuple> // c++11 specific
+
+// specific modules
+#include "arrayfill.h"  // contains arrayfill, zerofill, velocityfill, 
+                        //assignants and initialize
+#include "moveants.h"   // contains sumants, moveants, timestep_output and 
+                        //timestep
 
 int main()
 {
@@ -25,7 +29,8 @@ int main()
     const int tstop = 40;
 
     //initialize arrays (and return them to avoid use of global variables)
-    std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays = initialize(corner,tabdim,tabdim,total_ants);
+    std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays \
+                          = initialize(corner,tabdim,tabdim,total_ants);
 
     //extract results from returned tuple
     rarray<float,2> number_of_ants = std::get<0>(arrays);
@@ -38,7 +43,9 @@ int main()
     // run simulation
     for (int t = tstart; t < tstop; t++) {
 
-        new_number_of_ants = timestep(t,corner,tabdim,tabdim,frac_move,velocity_amplitude,number_of_ants,velocity_of_ants);
+        new_number_of_ants = timestep(t,corner,tabdim,tabdim,frac_move,\
+                                      velocity_amplitude,number_of_ants,\
+                                      velocity_of_ants);
 
         number_of_ants = new_number_of_ants;
 
