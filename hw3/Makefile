@@ -26,7 +26,7 @@ run: ants ants_original
 	mv gmon.out gmon_orig.out
 
 # Make original ants.cc
-original: ants_original.o
+ants_original: ants_original.o
 	${CPP} ${CXXFLAGS} ants_original.o -o ants_original
 
 ants_original.o: ants_original.cc
