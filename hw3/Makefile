@@ -9,6 +9,11 @@ CXXFLAGS = -std=c++11 -O2
 
 all: ants
 
+# Make original ants.cc
+
+original: ants_original
+	${CPP} ${CXXFLAGS} ants_original.cc -o ants_original
+
 # Link library files
 ants: ants.o arrayfill.o moveants.o
 	${CPP} arrayfill.o ants.o moveants.o -o ants
