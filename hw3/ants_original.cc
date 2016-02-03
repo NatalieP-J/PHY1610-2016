@@ -1,22 +1,25 @@
 #include <cmath>
 #include <iostream>
-#include "moveants.h"
-#include "arrayfill.h"
-#include <rarray>
 int main()
 {
     // ants walk on a table
-    rarray<float,2> number_of_ants(356,356);
-    rarray<float,2> new_number_of_ants(356,356);
-    rarray<float,2> velocity_of_ants(356,356);
+    float number_of_ants[356][356];
+    float new_number_of_ants[356][356];
+    float velocity_of_ants[356][356];
     const int total_ants = 1010; // initial number of ants
     // initialize
-
-    
-    
+    for (int i=0;i<356;i++) {
+        for (int j=0;j<356;j++) {
+            velocity_of_ants[i][j] = M_PI*(sin((2*M_PI*(i+j))/3560)+1);
+        }
+    }
     int n = 0;
     float z = 0;
-    number_of_ants = arrayfill(0,356,356, zerofill);
+    for (int i=0;i<356;i++) {
+        for (int j=0;j<356;j++) {
+            number_of_ants[i][j] = 0.0;
+        }
+    }
     while (n < total_ants) {
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
@@ -42,21 +45,20 @@ int main()
                 new_number_of_ants[i][j] = 0.0;
             }
         }
-       // for (int i=0;i<356;i++) {
-       //     for (int j=0;j<356;j++) {
-       //         int di = 1.9*sin(velocity_of_ants[i][j]);
-       //         int dj = 1.9*cos(velocity_of_ants[i][j]);
-       //         int i2 = i + di;
-       //         int j2 = j + dj;
+        for (int i=0;i<356;i++) {
+            for (int j=0;j<356;j++) {
+                int di = 1.9*sin(velocity_of_ants[i][j]);
+                int dj = 1.9*cos(velocity_of_ants[i][j]);
+                int i2 = i + di;
+                int j2 = j + dj;
                 // some ants do not walk
-       //         new_number_of_ants[i][j]+=0.8*number_of_ants[i][j];
+                new_number_of_ants[i][j]+=0.8*number_of_ants[i][j];
                 // the rest of the ants walk, but some fall of the table
-       //         if (i2>=0 and i2<356 and j2>=0 and j2<356) {
-       //             new_number_of_ants[i2][j2]+=0.2*number_of_ants[i][j];
-       //         }
-       //     }
-       // }
-        new_number_of_ants = moveants(0,356,356,0.2,1.9,number_of_ants,velocity_of_ants);
+                if (i2>=0 and i2<356 and j2>=0 and j2<356) {
+                    new_number_of_ants[i2][j2]+=0.2*number_of_ants[i][j];
+                }
+            }
+        }
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 number_of_ants[i][j] = new_number_of_ants[i][j];
@@ -65,4 +67,5 @@ int main()
         }
     }
     return 0;
-}  
+}             
+   
