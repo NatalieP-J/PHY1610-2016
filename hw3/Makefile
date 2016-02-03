@@ -5,18 +5,20 @@
 CPP = g++
 # Set compiler flags
 CXXFLAGS = -std=c++11 -O2 -g -pg
-# Set library flags
-LDFLAGS = -g
+# Set boost flags
+BOOSTFLAGS = -lboost_unit_test_framework -DBOOST_TEST_DYN_LINK
 # Choose profiler
 PROF = gprof
+# Choose profiler options
+PROFOPT = --line --no-graph
 
 
 all: profile
 
 # Rule to do gprof profiling
 profile: run
-	${PROF} ants gmon_ants.out > gprof_ants_LOG
-	${PROF} ants_original gmon_orig.out > gprof_orig_LOG
+	${PROF} ${PROFOPT} ants gmon_ants.out > gprof_ants_LOG
+	${PROF} ${PROFOPT} ants_original gmon_orig.out > gprof_orig_LOG
 
 # Rule to run ants and save output
 run: ants ants_original
@@ -26,15 +28,20 @@ run: ants ants_original
 	mv gmon.out gmon_orig.out
 
 # Make original ants.cc
-ants_original: ants_original.o
-	${CPP} ${CXXFLAGS} ants_original.o -o ants_original
+ants_original: ants_original.o ticktock.o
+	${CPP} ${CXXFLAGS} ticktock.o ants_original.o -o ants_original
 
 ants_original.o: ants_original.cc
 	${CPP} ${CXXFLAGS} ants_original.cc -c -o ants_original.o
 
 # Link library files
-ants: ants.o arrayfill.o moveants.o
-	${CPP} ${CXXFLAGS} arrayfill.o ants.o moveants.o -o ants
+ants: ants.o arrayfill.o moveants.o ticktock.o
+	${CPP} ${CXXFLAGS} ticktock.o arrayfill.o moveants.o ants.o -o ants
+
+# Test suite for moveants
+test: test.o moveants.o arrayfill.o
+	${CPP} ${CXXFLAGS} ${BOOSTFLAGS} test.o moveants.o arrayfill.o -o test
+	./test > boost_test_LOG
 
 # Create library files
 ants.o: ants.cc
@@ -47,7 +54,10 @@ arrayfill.o: arrayfill.cc arrayfill.h
 	${CPP} ${CXXFLAGS} arrayfill.cc -c -o arrayfill.o
 
 ticktock.o: ticktock.cc ticktock.h
-	${CXX} ${CXXFLAGS} -c -o ticktock.o ticktock.cc
+	${CPP} ${CXXFLAGS} -c -o ticktock.o ticktock.cc
+
+test.o: test.cc
+	${CPP} ${CXXFLAGS} ${BOOSTFLAGS} -c -o test.o test.cc
 
 # Remove library files and executables
 clean:

@@ -1,7 +1,11 @@
 #include <cmath>
 #include <iostream>
+#include "ticktock.h"
 int main()
 {
+    TickTock stopwatch;
+
+    stopwatch.tick();
     // ants walk on a table
     float number_of_ants[356][356];
     float new_number_of_ants[356][356];
@@ -31,15 +35,23 @@ int main()
             }
         }
     }
+
+    stopwatch.tock("Array initialization: ");
+
+    TickTock totaltime;
+
+    totaltime.tick();
     // run simulation
     for (int t = 0; t < 40; t++) {
+        stopwatch.tick();
+        
         float totants = 0.0;
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 totants += number_of_ants[i][j];
             }
         }
-        std::cout << t<< " " << totants << std::endl;
+        
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 new_number_of_ants[i][j] = 0.0;
@@ -62,10 +74,16 @@ int main()
         for (int i=0;i<356;i++) {
             for (int j=0;j<356;j++) {
                 number_of_ants[i][j] = new_number_of_ants[i][j];
-                totants += number_of_ants[i][j];
             }
         }
+
+        double runtime = stopwatch.silent_tock();
+
+        std::cout << "time step: " << t << " number of ants: " << totants <<  " runtime: " << runtime << std::endl;
     }
+
+    totaltime.tock("Total moving ant runtime: ");
+
     return 0;
 }             
    
