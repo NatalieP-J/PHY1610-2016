@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_CASE(my_test){
     float velocity_amplitude=1.9;
 
     // testing parameters
-    double precision = 1e-5
+    double precision = 1e-5;
 
     //initialize arrays (and return them to avoid use of global variables)
     std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays \
@@ -32,14 +32,14 @@ BOOST_AUTO_TEST_CASE(my_test){
 
     rarray<float,2> velocity_of_ants = std::get<2>(arrays);
 
-    double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants)
+    double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants);
 
-    BOOST_CHECK_MESSAGE(emptytot<precision,"Updated ant tracker array is not empty")
+    BOOST_CHECK_MESSAGE(emptytot<precision,"Updated ant tracker array is not empty");
 
     // total ants on the table before movement
     double pretot = sumants(tabdim,tabdim,0,number_of_ants);
 
-    BOOST_CHECK_MESSAGE(abs(pretot-total_ants)<precision, "Not all ants were distributed")
+    BOOST_CHECK_MESSAGE(abs(pretot-total_ants)<precision, "Not all ants were distributed");
 
     // move the ants
     new_number_of_ants = moveants(corner,tabdim,tabdim,frac_move,\
