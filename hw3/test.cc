@@ -19,7 +19,7 @@ BOOST_AUTO_TEST_CASE(my_test){
     float velocity_amplitude=1.9;
 
     // testing parameters
-    double precision = 1e-5;
+    double precision = 1e-5; // precision at which to compare doubles
 
     //initialize arrays (and return them to avoid use of global variables)
     std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays \
@@ -33,6 +33,10 @@ BOOST_AUTO_TEST_CASE(my_test){
     rarray<float,2> velocity_of_ants = std::get<2>(arrays);
 
     double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants);
+
+    int arrsize = len(number_of_ants)
+
+    std::cout << arrsize << std::endl;
 
     BOOST_CHECK_MESSAGE(emptytot<precision,"Updated ant tracker array is not empty");
 
