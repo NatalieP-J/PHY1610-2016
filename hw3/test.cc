@@ -32,12 +32,12 @@ BOOST_AUTO_TEST_CASE(my_test){
 
     rarray<float,2> velocity_of_ants = std::get<2>(arrays);
 
-    float emptytot = sumants(tabdim,tabdim,0,new_number_of_ants)
+    double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants)
 
     BOOST_CHECK_MESSAGE(emptytot<precision,"Updated ant tracker array is not empty")
 
     // total ants on the table before movement
-    float pretot = sumants(tabdim,tabdim,0,number_of_ants);
+    double pretot = sumants(tabdim,tabdim,0,number_of_ants);
 
     BOOST_CHECK_MESSAGE(abs(pretot-total_ants)<precision, "Not all ants were distributed")
 
@@ -47,7 +47,7 @@ BOOST_AUTO_TEST_CASE(my_test){
                                   velocity_of_ants);
 
     // total ants on the table after movement
-    float fintot = sumants(tabdim,tabdim,0, new_number_of_ants);
+    double fintot = sumants(tabdim,tabdim,0, new_number_of_ants);
 
     BOOST_CHECK_MESSAGE(fintot <= pretot, "Ants were generated during movement");
 }
