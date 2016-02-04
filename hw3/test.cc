@@ -34,7 +34,11 @@ BOOST_AUTO_TEST_CASE(my_test){
 
     double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants);
 
-    int arrsize = size(number_of_ants)
+    int arrsize = number_of_ants.size()
+
+    int arr_xshape = number_of_ants.extent(0)
+
+    int arr_yshape = number_of_ants.extent(1)
 
     std::cout << arrsize << std::endl;
 
