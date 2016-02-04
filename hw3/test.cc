@@ -34,11 +34,15 @@ BOOST_AUTO_TEST_CASE(my_test){
 
     double emptytot = sumants(tabdim,tabdim,0,new_number_of_ants);
 
-    int arrsize = number_of_ants.size()
+    int arrsize = number_of_ants.size();
 
-    int arr_xshape = number_of_ants.extent(0)
+    int arr_xshape = number_of_ants.extent(0);
 
-    int arr_yshape = number_of_ants.extent(1)
+    int arr_yshape = number_of_ants.extent(1);
+
+    BOOST_CHECK_MESSAGE(number_of_ants.size() == new_number_of_ants.size(),"Original ant tracker does not match updated ant tracker size");
+
+    BOOST_CHECK_MESSAGE(number_of_ants.size() == velocity_of_ants.size(),"Ant tracker and ant velocity do not match size");
 
     std::cout << arrsize << std::endl;
 
