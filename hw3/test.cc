@@ -48,16 +48,6 @@ BOOST_AUTO_TEST_CASE(my_test){
 
     BOOST_CHECK_MESSAGE(emptytot<precision,"Updated ant tracker array is not empty");
 
-    //initialize arrays (and return them to avoid use of global variables)
-    std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays2 \
-                          = initialize(corner,tabdim,tabdim,total_ants);
-
-    //extract results from returned tuple
-    rarray<float,2> number_of_ants2 = std::get<0>(arrays);
-
-    double diffsum = sumants(tabdim,tabdim,0,number_of_ants-number_of_ants2);
-    BOOST_CHECK_MESSAGE(diffsum<precision, "Ants allocated differently in second initialization")
-
     // total ants on the table before movement
     double pretot = sumants(tabdim,tabdim,0,number_of_ants);
 

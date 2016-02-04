@@ -1,0 +1,57 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  Ts/call  Ts/call  name    
+ 22.24      0.02     0.02                             operator[] (rarray:1373 @ 402062)
+ 16.68      0.04     0.02                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:16 @ 401fe0)
+ 16.68      0.05     0.02                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:22 @ 402016)
+ 11.12      0.06     0.01                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:25 @ 40202b)
+ 11.12      0.07     0.01                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:26 @ 40206d)
+  5.56      0.08     0.01                             timestep_output(int, int, int, double, ra::rarray<float, 2>) (moveants.cc:36 @ 402188)
+  5.56      0.08     0.01                             timestep_output(int, int, int, double, ra::rarray<float, 2>) (moveants.cc:37 @ 402198)
+  5.56      0.09     0.01                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:19 @ 402028)
+  5.56      0.09     0.01                             moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:22 @ 40202e)
+  0.00      0.09     0.00  5196176     0.00     0.00  zerofill(int, int, int) (arrayfill.cc:24 @ 401150)
+  0.00      0.09     0.00   126736     0.00     0.00  velocityfill(int, int, int) (arrayfill.cc:29 @ 401160)
+  0.00      0.09     0.00       43     0.00     0.00  TickTock::tick() (ticktock.cc:45 @ 400ff0)
+  0.00      0.09     0.00       43     0.00     0.00  TickTock::silent_tock() const (ticktock.cc:57 @ 401030)
+  0.00      0.09     0.00       42     0.00     0.00  arrayfill(int, int, int, float (*)(int, int, int)) (arrayfill.cc:11 @ 401360)
+  0.00      0.09     0.00       40     0.00     0.00  timestep_output(int, int, int, double, ra::rarray<float, 2>) (moveants.cc:44 @ 402120)
+  0.00      0.09     0.00       40     0.00     0.00  moveants(int, int, int, float, float, ra::rarray<float, 2>, ra::rarray<float, 2>) (moveants.cc:11 @ 401ed0)
+  0.00      0.09     0.00        3     0.00     0.00  TickTock::tock(char const*) const (ticktock.cc:51 @ 401070)
+  0.00      0.09     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z8moveantsiiiffN2ra6rarrayIfLi2EEES1_ (moveants.cc:65 @ 402730)
+  0.00      0.09     0.00        1     0.00     0.00  _GLOBAL__sub_I__Z9arrayfilliiiPFfiiiE (arrayfill.cc:75 @ 401ea0)
+  0.00      0.09     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN8TickTock4tickEv (ticktock.cc:62 @ 401110)
+  0.00      0.09     0.00        1     0.00     0.00  _GLOBAL__sub_I_main (ants.cc:73 @ 403270)
+  0.00      0.09     0.00        1     0.00     0.00  assignants(int, int, int, float, ra::rarray<float, 2>) (arrayfill.cc:35 @ 4011b0)
+  0.00      0.09     0.00        1     0.00     0.00  initialize(int, int, int, float) (arrayfill.cc:56 @ 401590)
+  0.00      0.09     0.00        1     0.00     0.00  ra::rarray<float, 2>::base(float* const*) (rarray:1757 @ 401e80)
+  0.00      0.09     0.00        1     0.00     0.00  std::_Tuple_impl<0ul, ra::rarray<float, 2>, ra::rarray<float, 2>, ra::rarray<float, 2> >::~_Tuple_impl() (tuple:229 @ 402760)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+ 
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this 
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
