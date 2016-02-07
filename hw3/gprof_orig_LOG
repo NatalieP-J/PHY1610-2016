@@ -3,21 +3,20 @@ Flat profile:
 Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total           
  time   seconds   seconds    calls  Ts/call  Ts/call  name    
- 35.83      0.05     0.05                             main (ants_original.cc:67 @ 401217)
- 14.33      0.07     0.02                             main (ants_original.cc:70 @ 401243)
- 10.75      0.09     0.02                             main (ants_original.cc:51 @ 401110)
-  7.17      0.10     0.01                             main (ants_original.cc:62 @ 4011b0)
-  7.17      0.11     0.01                             main (ants_original.cc:62 @ 4011e0)
-  7.17      0.12     0.01                             main (ants_original.cc:67 @ 4011e8)
-  7.17      0.13     0.01                             main (ants_original.cc:63 @ 401200)
-  3.58      0.13     0.01                             main (ants_original.cc:50 @ 401121)
-  3.58      0.14     0.01                             main (ants_original.cc:62 @ 4011fc)
-  3.58      0.14     0.01                             main (ants_original.cc:64 @ 401210)
-  0.00      0.14     0.00       42     0.00     0.00  TickTock::tick() (ticktock.cc:45 @ 400d40)
-  0.00      0.14     0.00       42     0.00     0.00  TickTock::silent_tock() const (ticktock.cc:57 @ 400d80)
-  0.00      0.14     0.00        2     0.00     0.00  TickTock::tock(char const*) const (ticktock.cc:51 @ 400dc0)
-  0.00      0.14     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN8TickTock4tickEv (ticktock.cc:62 @ 400e60)
-  0.00      0.14     0.00        1     0.00     0.00  _GLOBAL__sub_I_main (ants_original.cc:88 @ 401420)
+ 36.48      0.04     0.04                             main (ants_original.cc:70 @ 401243)
+ 13.68      0.06     0.02                             main (ants_original.cc:51 @ 401110)
+  9.12      0.07     0.01                             main (ants_original.cc:57 @ 401150)
+  9.12      0.08     0.01                             main (ants_original.cc:62 @ 4011b0)
+  9.12      0.09     0.01                             main (ants_original.cc:62 @ 4011e0)
+  9.12      0.10     0.01                             main (ants_original.cc:67 @ 4011e8)
+  4.56      0.10     0.01                             main (ants_original.cc:50 @ 401121)
+  4.56      0.11     0.01                             main (ants_original.cc:62 @ 4011fc)
+  4.56      0.11     0.01                             main (ants_original.cc:63 @ 401200)
+  0.00      0.11     0.00       42     0.00     0.00  TickTock::tick() (ticktock.cc:45 @ 400d40)
+  0.00      0.11     0.00       42     0.00     0.00  TickTock::silent_tock() const (ticktock.cc:57 @ 400d80)
+  0.00      0.11     0.00        2     0.00     0.00  TickTock::tock(char const*) const (ticktock.cc:51 @ 400dc0)
+  0.00      0.11     0.00        1     0.00     0.00  _GLOBAL__sub_I__ZN8TickTock4tickEv (ticktock.cc:62 @ 400e60)
+  0.00      0.11     0.00        1     0.00     0.00  _GLOBAL__sub_I_main (ants_original.cc:88 @ 401420)
 
  %         the percentage of the total running time of the
 time       program used by this function.
