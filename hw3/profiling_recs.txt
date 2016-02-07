@@ -1,0 +1,10 @@
+# Natalie Price-Jones Feb 2016
+
+Overall my modularized version of the code performs more slowly (time_ants_LOG) than the monolithic code (time_orig_LOG) by about 0.1 seconds overall.
+In both codes, the slowest step in moving the ants after each timestep. 
+
+The gprof output for the monolithic code (gprof_orig_LOG) indicates that it is the assigning of ant numbers to the new ant tracking array that is the rate limiting step. In particular, the top three lines where most time is spent are lines in which the code is accessing an element from an array and assigning it a new value.
+
+
+
+- use native fill to fill arrays rather than zerofill
