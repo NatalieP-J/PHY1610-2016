@@ -1,10 +1,28 @@
 # Natalie Price-Jones Feb 2016
 
 Overall my modularized version of the code performs more slowly (time_ants_LOG) than the monolithic code (time_orig_LOG) by about 0.1 seconds overall.
-In both codes, the slowest step in moving the ants after each timestep. 
 
-The gprof output for the monolithic code (gprof_orig_LOG) indicates that it is the assigning of ant numbers to the new ant tracking array that is the rate limiting step. In particular, the top three lines where most time is spent are lines in which the code is accessing an element from an array and assigning it a new value.
+The gprof output for the monolithic code (gprof_orig_LOG) indicates that it is the assigning of ant numbers to the new ant tracking array that is the rate limiting step. This is also true of the modularized code (see gprof_ants_LOG), although the percentage of time spent on this line is lower than in the monolithic code. In both cases the line the most time is spent on 'new_antarray[i2][j2]+=0.2*antarray[i][j];', i.e. moving ants that do not fall off of the table. I'm not entirely sure why it is this line that has the most time spent on it, given that there is a very similar line that accounts for ants that do not move 'new_antarray[i][j]+=0.2*antarray[i][j];' that is called at every iteration of the enclosing for loop, where the former is called only in instances where an if statement is satisfied. 
 
+The second biggest bottleneck (in both codes) is once again related to calling an array from memory - its doing the sum of the ant array. In the modularized code, this shares an equal time percentage with checking the if statement for moving ants, and filling the initial arrays.
 
+Both of these bottlenecks might be alleviated by combining the two loops that assign the ants and perform the sum, e.g.
 
-- use native fill to fill arrays rather than zerofill
+float totants = 0.0;
+for (int i=0;i<356;i++) {
+    for (int j=0;j<356;j++) {
+        totants += number_of_ants[i][j]
+        int di = 1.9*sin(velocity_of_ants[i][j]);
+        int dj = 1.9*cos(velocity_of_ants[i][j]);
+        int i2 = i + di;
+        int j2 = j + dj;
+        // some ants do not walk
+        new_number_of_ants[i][j]+=0.8*number_of_ants[i][j];
+        // the rest of the ants walk, but some fall of the table
+        if (i2>=0 and i2<356 and j2>=0 and j2<356) {
+            new_number_of_ants[i2][j2]+=0.2*number_of_ants[i][j];
+        }
+    }
+}
+
+This would produce the same output as the code in its current form. Further performance improvements would be seen by combining the currently three separate loops that initialize the three arrays number_of_ants, new_number_of_ants, and velocity_of_ants. In addition, using rarray's native function to fill an array with zeros might prove faster than the existing loop that sets new_number_of_ants to zero at the start of each timestep.

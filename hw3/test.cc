@@ -23,6 +23,8 @@ BOOST_AUTO_TEST_CASE(my_test){
     // testing parameters
     double precision = 1e-5; // precision at which to compare doubles
 
+    // TESTING ARRAY INITIALIZATION
+
     //initialize arrays (and return them to avoid use of global variables)
     std::tuple<rarray<float,2>,rarray<float,2>,rarray<float,2>> arrays \
                           = initialize(corner,tabdim,tabdim,total_ants);
@@ -52,6 +54,8 @@ BOOST_AUTO_TEST_CASE(my_test){
     double pretot = sumants(tabdim,tabdim,0,number_of_ants);
 
     BOOST_CHECK_MESSAGE(abs(pretot-total_ants)<precision, "Not all ants were distributed");
+
+    // TESTING SINGLE TIME STEP
 
     // move the ants
     new_number_of_ants = moveants(corner,tabdim,tabdim,frac_move,\

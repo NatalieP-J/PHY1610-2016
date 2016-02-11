@@ -5,7 +5,7 @@
 # Choose compiler
 CPP = g++
 # Set compiler flags
-CXXFLAGS = -std=c++11 -O2 -g -pg -I/home/b/bovy/njones/code/include
+CXXFLAGS = -std=c++11 -O2 -pg -gstabs -I/home/b/bovy/njones/code/include
 # Set boost flags
 BOOSTFLAGS = -lboost_unit_test_framework
 # Choose profiler
