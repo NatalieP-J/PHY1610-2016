@@ -1,47 +1,47 @@
-Variable initialization: 	1.78e-07 sec
-Array initialization: 	0.01617 sec
-time step: 0 number of ants: 1010 runtime: 0.009559
-time step: 1 number of ants: 972 runtime: 0.009554
-time step: 2 number of ants: 934 runtime: 0.009549
-time step: 3 number of ants: 896 runtime: 0.00955
-time step: 4 number of ants: 858.2 runtime: 0.00955
-time step: 5 number of ants: 820.6 runtime: 0.009545
-time step: 6 number of ants: 783.4 runtime: 0.009546
-time step: 7 number of ants: 746.9 runtime: 0.00957
-time step: 8 number of ants: 711.2 runtime: 0.009557
-time step: 9 number of ants: 676.5 runtime: 0.009548
-time step: 10 number of ants: 643 runtime: 0.009552
-time step: 11 number of ants: 611 runtime: 0.009555
-time step: 12 number of ants: 580.6 runtime: 0.00955
-time step: 13 number of ants: 551.9 runtime: 0.009547
-time step: 14 number of ants: 524.9 runtime: 0.009549
-time step: 15 number of ants: 499.7 runtime: 0.009553
-time step: 16 number of ants: 476.4 runtime: 0.009555
-time step: 17 number of ants: 454.9 runtime: 0.009544
-time step: 18 number of ants: 435.1 runtime: 0.009546
-time step: 19 number of ants: 417.1 runtime: 0.009546
-time step: 20 number of ants: 400.6 runtime: 0.009544
-time step: 21 number of ants: 385.7 runtime: 0.009546
-time step: 22 number of ants: 372.2 runtime: 0.00955
-time step: 23 number of ants: 360.1 runtime: 0.009544
-time step: 24 number of ants: 349.2 runtime: 0.009548
-time step: 25 number of ants: 339.4 runtime: 0.009546
-time step: 26 number of ants: 330.6 runtime: 0.009547
-time step: 27 number of ants: 322.8 runtime: 0.009543
-time step: 28 number of ants: 315.8 runtime: 0.009547
-time step: 29 number of ants: 309.6 runtime: 0.009545
-time step: 30 number of ants: 304.1 runtime: 0.009547
-time step: 31 number of ants: 299.1 runtime: 0.009542
-time step: 32 number of ants: 294.7 runtime: 0.009545
-time step: 33 number of ants: 290.8 runtime: 0.009546
-time step: 34 number of ants: 287.2 runtime: 0.009541
-time step: 35 number of ants: 284.1 runtime: 0.009542
-time step: 36 number of ants: 281.2 runtime: 0.009545
-time step: 37 number of ants: 278.7 runtime: 0.009546
-time step: 38 number of ants: 276.4 runtime: 0.009544
-time step: 39 number of ants: 274.3 runtime: 0.009544
-Total moving ant runtime: 	0.3897 sec
+Variable initialization: 	2.25e-07 sec
+Array initialization: 	0.01597 sec
+time step: 0 number of ants: 1010 runtime: 0.009558
+time step: 1 number of ants: 972 runtime: 0.009558
+time step: 2 number of ants: 934 runtime: 0.009555
+time step: 3 number of ants: 896 runtime: 0.009558
+time step: 4 number of ants: 858.2 runtime: 0.009557
+time step: 5 number of ants: 820.6 runtime: 0.009555
+time step: 6 number of ants: 783.4 runtime: 0.009557
+time step: 7 number of ants: 746.9 runtime: 0.009555
+time step: 8 number of ants: 711.2 runtime: 0.009556
+time step: 9 number of ants: 676.5 runtime: 0.00956
+time step: 10 number of ants: 643 runtime: 0.009572
+time step: 11 number of ants: 611 runtime: 0.009557
+time step: 12 number of ants: 580.6 runtime: 0.009551
+time step: 13 number of ants: 551.9 runtime: 0.009551
+time step: 14 number of ants: 524.9 runtime: 0.00955
+time step: 15 number of ants: 499.7 runtime: 0.009552
+time step: 16 number of ants: 476.4 runtime: 0.009552
+time step: 17 number of ants: 454.9 runtime: 0.009552
+time step: 18 number of ants: 435.1 runtime: 0.009554
+time step: 19 number of ants: 417.1 runtime: 0.009551
+time step: 20 number of ants: 400.6 runtime: 0.009552
+time step: 21 number of ants: 385.7 runtime: 0.009557
+time step: 22 number of ants: 372.2 runtime: 0.009551
+time step: 23 number of ants: 360.1 runtime: 0.009549
+time step: 24 number of ants: 349.2 runtime: 0.009554
+time step: 25 number of ants: 339.4 runtime: 0.009552
+time step: 26 number of ants: 330.6 runtime: 0.009551
+time step: 27 number of ants: 322.8 runtime: 0.009553
+time step: 28 number of ants: 315.8 runtime: 0.009554
+time step: 29 number of ants: 309.6 runtime: 0.009554
+time step: 30 number of ants: 304.1 runtime: 0.009554
+time step: 31 number of ants: 299.1 runtime: 0.009555
+time step: 32 number of ants: 294.7 runtime: 0.009553
+time step: 33 number of ants: 290.8 runtime: 0.009549
+time step: 34 number of ants: 287.2 runtime: 0.009551
+time step: 35 number of ants: 284.1 runtime: 0.009553
+time step: 36 number of ants: 281.2 runtime: 0.009554
+time step: 37 number of ants: 278.7 runtime: 0.009552
+time step: 38 number of ants: 276.4 runtime: 0.009551
+time step: 39 number of ants: 274.3 runtime: 0.009555
+Total moving ant runtime: 	0.389 sec
 
-real	0m0.412s
-user	0m0.399s
-sys	0m0.010s
+real	0m0.409s
+user	0m0.396s
+sys	0m0.012s
