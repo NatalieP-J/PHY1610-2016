@@ -1,5 +1,5 @@
-#include <iostream> 
-#include <gsl/gsl_roots.h> 
+#include <iostream>
+#include <gsl/gsl_roots.h>
 
 struct Params {
    double v, w, a, b, c;

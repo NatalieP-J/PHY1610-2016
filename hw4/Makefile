@@ -2,12 +2,16 @@
 
 # Make file for rfex.cc
 
+# For running locally
+#SCINET_GSL_INC = /usr/local/include
+#SCINET_GSL_LIB = /usr/local/include
+
 # Choose compiler
 CXX = g++
 # Set compiler flags
 CXXFLAGS = -std=c++11 -O2 -g
 # Include flags
-INCFLAGS = -I ${SCINET_GSL_INC}
+INCFLAGS = -I${SCINET_GSL_INC}
 # Library flags
 LIBFLAGS = -L${SCINET_GSL_LIB} -lgsl -lgslcblas
 
