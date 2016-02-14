@@ -17,13 +17,13 @@ all: profile
 
 # Rule to do gprof profiling
 profile: run
-	rm gprof_ants_LOG gprof_orig_LOG
+	rm gprof_ants_LOG gprof_orig_LOG # clean old log files
 	${PROF} ${PROFOPT} ants gmon_ants.out > gprof_ants_LOG
 	${PROF} ${PROFOPT} ants_original gmon_orig.out > gprof_orig_LOG
 
 # Rule to run ants and save output
 run: compile
-	rm time_ants_LOG time_orig_LOG
+	rm time_ants_LOG time_orig_LOG # clean old log files
 	(time ./ants) &> time_ants_LOG
 	mv gmon.out gmon_ants.out
 	(time ./ants_original) &> time_orig_LOG
