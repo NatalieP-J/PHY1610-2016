@@ -4,7 +4,7 @@
 
 # For running locally
 #SCINET_GSL_INC = /usr/local/include
-#SCINET_GSL_LIB = /usr/local/include
+#SCINET_GSL_LIB = /usr/local/lib
 
 # Choose compiler
 CXX = g++
@@ -21,4 +21,4 @@ rfex: rfex.o
 	${CXX} ${CXXFLAGS} ${LIBFLAGS} rfex.o -o rfex
 
 rfex.o: rfex.cpp
-	${CXX} ${CXXFLAGS} ${INCFLAGS} rfex.cpp -o rfex.o
+	${CXX} ${CXXFLAGS} ${INCFLAGS} -c rfex.cpp -o rfex.o
