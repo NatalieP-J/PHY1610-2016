@@ -27,12 +27,6 @@ public:
 
   // Calculate the total energy
   double total_energy(double x);
-  
-  // Tests:
-  // grav_potential == 0 if mass == 0
-  // total_energy==spring_potential if mass == 0
-  // Other notes:
-  // How to handle x==0 case?
 
   // Destructor
   ~energy();
