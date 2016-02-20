@@ -1,10 +1,6 @@
-# Natalie Price-Jones Feb 2016
+# Natalie Price-Jones Feb 206
 
-# Make file for rfex.cc
-
-# For running locally
-#SCINET_GSL_INC = /usr/local/include
-#SCINET_GSL_LIB = /usr/local/lib
+# Make file for energy minimization
 
 # Choose compiler
 CXX = g++
@@ -15,10 +11,9 @@ INCFLAGS = -I${SCINET_GSL_INC}
 # Library flags
 LIBFLAGS = -L${SCINET_GSL_LIB} -lgsl -lgslcblas
 
-all: rfex
+# Make libary files
 
-rfex: rfex.o
-	${CXX} ${CXXFLAGS} ${LIBFLAGS} rfex.o -o rfex
+all: energy.o
 
-rfex.o: rfex.cpp
-	${CXX} ${CXXFLAGS} ${INCFLAGS} -c rfex.cpp -o rfex.o
+energy.o: energy.cpp
+	${CXX} ${CXXFLAGS} -c energy.cpp -o energy.o
