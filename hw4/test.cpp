@@ -5,7 +5,12 @@
 #include <boost/test/unit_test.hpp>
 #include "energy.h"
 
-BOOST_AUTO_TEST_CAST(energy){
-  double mass = 0.1;
-  energy* mass_energy = new energy(mass);
+BOOST_AUTO_TEST_CASE(energytest){
+  double precision = 1e-10;
+  double m = 0;
+  double test_pos = 0.4;
+  energy zeromass(m);
+  double masscheck = zeromass.mass;
+  double test_pot = zeromass.total_energy(test_pos);
+  BOOST_CHECK_MESSAGE(test_pot < precision, "Zero mass object has weight");
 }
