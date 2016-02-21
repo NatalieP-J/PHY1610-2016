@@ -16,7 +16,7 @@ LIBFLAGS = -L${SCINET_GSL_LIB} -lgsl -lgslcblas
 all: test
 
 main: main.o energy.o minimize.o
-	${CXX} ${CXXFLAGS} minimize.o energy.o main.o -o main
+	${CXX} ${CXXFLAGS} ${LIBFLAGS} minimize.o energy.o main.o -o main
 
 test: test.o energy.o
 	${CXX} ${CXXFLAGS} ${BOOSTFLAGS} test.o energy.o -o test
@@ -27,10 +27,10 @@ test: test.o energy.o
 main.o: main.cpp
 	${CXX} ${CXXFLAGS} -c main.cpp -o main.o
 
-minimize.o: minimize.cpp, minimize.h
-	${CXX} ${CXXFLAGS} -c minimize.cpp -o minimize.o
+minimize.o: minimize.cpp minimize.h
+	${CXX} ${CXXFLAGS} ${INCFLAGS} -c minimize.cpp -o minimize.o
 
-energy.o: energy.cpp, energy.h
+energy.o: energy.cpp energy.h
 	${CXX} ${CXXFLAGS} -c energy.cpp -o energy.o
 
 test.o: test.cpp

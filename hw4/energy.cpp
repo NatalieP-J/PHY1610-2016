@@ -1,4 +1,6 @@
 #include <cmath>
+#include <rarray>
+#include <iostream>
 
 class energy{
 
@@ -25,7 +27,6 @@ public:
   // Calculate gravitational potential at a position x
   double grav_potential(double x);
 
-  // Calculate the total energy
   double total_energy(double x);
 
   // Calculate the derivative of the spring potential at postion x
@@ -34,14 +35,12 @@ public:
   // Calculate the derivative of the gravitational potential at position x
   double ddx_grav(double x);
 
-  // Calculate the derivative of the total energy 
-  double ddx_total(double x);
-  
   // Destructor
   ~energy();
 };
 
 energy::energy(double m){
+  std::cout<<"In constructor\n";
   mass = m;
 }
 
@@ -56,7 +55,6 @@ double energy::grav_potential(double x){
 }
 
 double energy::total_energy(double x){
-  // Return energy in Joules
   return spring_potential(x) + grav_potential(x);
 }
 
@@ -66,10 +64,6 @@ double energy::ddx_spring(double x){
 
 double energy::ddx_grav(double x){
   return -mass*g;
-}
-
-double energy::ddx_total(double x){
-  return ddx_spring(x) + ddx_grav(x);
 }
 
 energy::~energy(){

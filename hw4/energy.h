@@ -19,7 +19,6 @@ public:
   double total_energy(double x);
   double ddx_spring(double x);
   double ddx_grav(double x);
-  double ddx_total(double x);
   ~energy();
 
 };
