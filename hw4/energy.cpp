@@ -43,7 +43,6 @@ public:
 };
 
 energy::energy(double m){
-  std::cout<<"In constructor\n";
   mass = m;
 }
 
