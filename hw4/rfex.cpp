@@ -8,7 +8,7 @@ struct Params {
 double examplefunction(double x, void* param){ 
    Params* p = (Params*)param;
    return p->a*cos(sin(p->v+p->w*x))+p->b*x-p->c*x*x;
-}
+};
 
 int main() {
    double x_lo = -4.0;
