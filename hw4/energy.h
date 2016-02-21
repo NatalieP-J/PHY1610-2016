@@ -22,13 +22,13 @@ public:
   double ddx_spring(double x);
   double ddx_grav(double x);
   double ddx_total(double x);
-  double f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double));
   void f_min_all();
-  double root_diff();
   ~energy();
 
 };
 
-maximum_load();
+double f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double));
+double root_diff();
+double maximum_load();
 
 #endif

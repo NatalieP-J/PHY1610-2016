@@ -41,8 +41,6 @@ public:
 
   double ddx_total(double x);
 
-  double f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double));
-
   void f_min_all();
 
   double root_diff();
@@ -78,28 +76,6 @@ double energy::ddx_grav(double x){
 
 double energy::ddx_total(double x){
   return ddx_spring(x) + ddx_grav(x);
-}
-
-double energy::f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double)){
-  gsl_root_fsolver* solver;
-  gsl_function fwrapper;
-  //std::cout << "Root finder initialized\n";
-  solver = gsl_root_fsolver_alloc(gsl_root_fsolver_brent);
-  fwrapper.function = f;
-  gsl_root_fsolver_set(solver, &fwrapper, x_lo, x_hi);
-  //std::cout << "iter [lower, upper] root err value\n";
-  int status = 1;
-  double x_rt = -1;
-  for (int iter=0; status and iter<maxiter; iter++){
-    gsl_root_fsolver_iterate(solver);
-    x_rt = gsl_root_fsolver_root(solver);
-    x_lo = gsl_root_fsolver_x_lower(solver);
-    x_hi = gsl_root_fsolver_x_upper(solver);
-    //std::cout << iter << " " << x_lo << " " << x_hi << " " << x_rt << " " << x_hi-x_lo << "\n";
-    status = gsl_root_test_interval(x_lo,x_hi,0,precision);
-  }
-  gsl_root_fsolver_free(solver);
-  return x_rt;
 }
 
 void energy::f_min_all(){
@@ -138,6 +114,28 @@ void energy::f_min_all(){
 }
 
 energy::~energy(){
+}
+
+double energy::f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double)){
+  gsl_root_fsolver* solver;
+  gsl_function fwrapper;
+  //std::cout << "Root finder initialized\n";
+  solver = gsl_root_fsolver_alloc(gsl_root_fsolver_brent);
+  fwrapper.function = f;
+  gsl_root_fsolver_set(solver, &fwrapper, x_lo, x_hi);
+  //std::cout << "iter [lower, upper] root err value\n";
+  int status = 1;
+  double x_rt = -1;
+  for (int iter=0; status and iter<maxiter; iter++){
+    gsl_root_fsolver_iterate(solver);
+    x_rt = gsl_root_fsolver_root(solver);
+    x_lo = gsl_root_fsolver_x_lower(solver);
+    x_hi = gsl_root_fsolver_x_upper(solver);
+    //std::cout << iter << " " << x_lo << " " << x_hi << " " << x_rt << " " << x_hi-x_lo << "\n";
+    status = gsl_root_test_interval(x_lo,x_hi,0,precision);
+  }
+  gsl_root_fsolver_free(solver);
+  return x_rt;
 }
 
 double root_diff(double mass){
