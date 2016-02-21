@@ -20,7 +20,7 @@ int main(){
   for (int i=0; i<numsteps; i++){
     std::cout << "i = " << i << " m = " << mass << "\n";
     energy mass_energy(mass);
-    mass_energy.f_min_all(mass);
+    mass_energy.f_min_all();
     std::cout << "roots " << mass_energy.root1 << ", " << mass_energy.root2 << "\n";
     mass += inc_mass;
   }
