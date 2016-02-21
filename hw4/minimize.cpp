@@ -10,7 +10,7 @@
 double root_diff(double mass, void* mass_energy){
   energy m_energy(mass);
   f_min_all(mass,m_energy);
-  return abs(m_energy.total_energy(m_energy.root1)-m_energy.total_energy(m_energy.root2)));
+  return abs(m_energy.root1-m_energy.root2);
 }
 
 double maximum_load(){
