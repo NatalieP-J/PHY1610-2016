@@ -1,3 +1,6 @@
+#include <rarray>
+#include <tuple>
+
 #ifndef ENERGY_H
 #define ENERGY_H
 
@@ -21,6 +24,7 @@ public:
   double total_energy(double x);
   double ddx_spring(double x);
   double ddx_grav(double x);
+  std::tuple<double,double> get_roots();
   ~energy();
 
 };

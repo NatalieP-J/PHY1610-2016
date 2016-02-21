@@ -4,10 +4,11 @@
 #include <rarray>
 #include "minimize.h"
 #include "energy.h"
+#include <tuple>
 
 int main(){
 
-  rarray<double,1> roots(2);
+  std::tuple<double,double> roots;
 
   double min_mass = 0.0; // kg
   double max_mass = 0.5; // kg
@@ -20,9 +21,14 @@ int main(){
   for (int i=0; i<numsteps; i++){
     std::cout << "i = " << i << " m = " << mass << "\n";
     energy mass_energy(mass);
-    f_min_all(mass,mass_energy);
-    std::cout << "roots " << mass_energy.root1 << ", " << mass_energy.root2 << "\n";
+    roots = f_min_all(mass,mass_energy);
+    double rt1 = std::get<0>(roots);
+    double rt2 = std::get<1>(roots);
+    std::cout << "roots " << rt1 << ", " << rt2 << "\n";
+    std::cout << "energy " << mass_energy.total_energy(rt1) << ", " << mass_energy.total_energy(rt2) << "\n";
     mass += inc_mass;
   }
+
+  std::cout << "determining maximum load" << "\n";
   double maxload = maximum_load();
 }

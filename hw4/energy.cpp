@@ -1,6 +1,7 @@
 #include <cmath>
 #include <rarray>
 #include <iostream>
+#include <tuple>
 
 class energy{
 
@@ -24,6 +25,8 @@ public:
   double root1;
   double root2;
 
+  std::tuple<double,double> roots;
+
   // Calculate spring potential at a position x
   double spring_potential(double x);
 
@@ -38,12 +41,15 @@ public:
   // Calculate the derivative of the gravitational potential at position x
   double ddx_grav(double x);
 
+  std::tuple<double,double> get_roots();
+
   // Destructor
   ~energy();
 };
 
 energy::energy(double m){
   mass = m;
+  
 }
 
 double energy::spring_potential(double x){
@@ -66,6 +72,10 @@ double energy::ddx_spring(double x){
 
 double energy::ddx_grav(double x){
   return -mass*g;
+}
+
+std::tuple<double,double> energy::get_roots(){
+  return std::make_tuple(root1,root2);
 }
 
 energy::~energy(){
