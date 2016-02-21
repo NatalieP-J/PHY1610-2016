@@ -30,5 +30,6 @@ public:
 double f_min(double x_lo, double x_hi, int maxiter, double precision, double (*f)(double));
 double root_diff();
 double maximum_load();
+bool samesign(double x, double y);
 
 #endif
