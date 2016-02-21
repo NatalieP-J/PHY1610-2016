@@ -33,11 +33,8 @@ double ddx_total(double x, void* mass_energy){
   return m_energy->ddx_spring(x) + m_energy->ddx_grav(x);
 }
 
-rarray<double,1> f_min_all(double mass){
+void f_min_all(double mass,energy mass_energy){
   std::cout<<"Beginning root finding\n";
-  rarray<double,1> roots(2);
-  energy mass_energy(mass);
-  std::cout<<"Created energy object\n";
   double precision = 1e-5;
   int maxiter = 100;
   double x_lo = 0.05;
@@ -45,19 +42,18 @@ rarray<double,1> f_min_all(double mass){
   std::cout << "Calling root finder\n";
   double x_rt = f_min(x_lo,x_hi,maxiter,precision,mass_energy,ddx_total);
   std::cout << "value at root 1 " << mass_energy.total_energy(x_rt) << "\n";
-  roots[0] = x_rt;
+  mass_energy.root1 = x_rt;
   x_lo = 0.4;
   x_hi = 0.49;
   x_rt = f_min(x_lo,x_hi,maxiter,precision,mass_energy,ddx_total);
   std::cout << "value at root 2 " << mass_energy.total_energy(x_rt) << "\n";
-  roots[1] = x_rt;
-  return roots;
-  
+  mass_energy.root2 = x_rt;  
 }
 
 double root_diff(double mass, void* mass_energy){
-  rarray<double,1> roots = f_min_all(mass);
-  return abs(roots[0]-roots[1]);
+  energy m_energy(mass);
+  f_min_all(mass,m_energy);
+  return abs(m_energy.root1-m_energy.root2);
 }
 
 double maximum_load(){

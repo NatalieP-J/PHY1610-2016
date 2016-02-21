@@ -14,6 +14,8 @@ private:
 public:
   energy(double m);
   double mass;
+  double root1;
+  double root2;
   double spring_potential(double x);
   double grav_potential(double x);
   double total_energy(double x);

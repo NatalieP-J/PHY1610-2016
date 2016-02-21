@@ -21,6 +21,9 @@ public:
   
   double mass;
 
+  double root1;
+  double root2;
+
   // Calculate spring potential at a position x
   double spring_potential(double x);
 

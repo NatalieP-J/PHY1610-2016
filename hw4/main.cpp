@@ -19,8 +19,8 @@ int main(){
   double mass = min_mass;
   for (int i=0; i<numsteps; i++){
     std::cout << "i = " << i << " m = " << mass << "\n";
-    //energy mass_energy(mass);
-    roots = f_min_all(mass);
+    energy mass_energy(mass);
+    f_min_all(mass,mass_energy);
     mass += inc_mass;
   }
   
