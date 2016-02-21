@@ -21,5 +21,6 @@ BOOST_AUTO_TEST_CASE(energytest){
   double masscheck = zeromass.mass;
   BOOST_CHECK_MESSAGE(abs(masscheck - m) < precision, "Mass changed after energy calculation");
 
-
+  // confirm minimization of spring_potential == minimization of total_energy is mass==0
+  // test that found root has lower values than original x interval
 }

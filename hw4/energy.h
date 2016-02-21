@@ -17,6 +17,9 @@ public:
   double spring_potential(double x);
   double grav_potential(double x);
   double total_energy(double x);
+  double ddx_spring(double x);
+  double ddx_grav(double x);
+  double ddx_total(double x);
   ~energy();
 
 };

@@ -28,6 +28,15 @@ public:
   // Calculate the total energy
   double total_energy(double x);
 
+  // Calculate the derivative of the spring potential at postion x
+  double ddx_spring(double x);
+
+  // Calculate the derivative of the gravitational potential at position x
+  double ddx_grav(double x);
+
+  // Calculate the derivative of the total energy 
+  double ddx_total(double x);
+  
   // Destructor
   ~energy();
 };
@@ -49,6 +58,18 @@ double energy::grav_potential(double x){
 double energy::total_energy(double x){
   // Return energy in Joules
   return spring_potential(x) + grav_potential(x);
+}
+
+double energy::ddx_spring(double x){
+  return a*((-b/pow(x,2)) + ((-2*pow(d,2))/(f*pow((x-d),3))) + (2*c*(x-b)/(2*a))*exp((-c*pow((x-b),2))/(2*a)));
+}
+
+double energy::ddx_grav(double x){
+  return -mass*g;
+}
+
+double energy::ddx_total(double x){
+  return ddx_spring(x) + ddx_grav(x);
 }
 
 energy::~energy(){
