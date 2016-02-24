@@ -1,3 +1,5 @@
+// Natalie Price-Jones Feb 2016
+
 #include <tuple>
 
 #ifndef ENERGY_H

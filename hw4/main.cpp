@@ -4,7 +4,7 @@
 #include "energy.h" // energy class
 #include <tuple> // used to hold the two roots
 #include <fstream> // used for writing to file
-#include <math.h> // isnan and min function
+#include <math.h> // isnan function
 
 int main(){
   
