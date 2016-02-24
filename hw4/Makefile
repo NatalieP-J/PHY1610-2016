@@ -1,4 +1,4 @@
-# Natalie Price-Jones Feb 206
+# Natalie Price-Jones Feb 2016
 
 # Make file for energy minimization
 
@@ -13,11 +13,13 @@ INCFLAGS = -I${SCINET_GSL_INC}
 # Library flags
 LIBFLAGS = -L${SCINET_GSL_LIB} -lgsl -lgslcblas
 
-all: test
+all: main
 
+# Executable that calculates the minima of the energy function as defined in energy.cpp
 main: main.o energy.o minimize.o
 	${CXX} ${CXXFLAGS} ${LIBFLAGS} minimize.o energy.o main.o -o main
 
+# Executable that creates a BOOST test file for energy.cpp
 test: test.o energy.o
 	${CXX} ${CXXFLAGS} ${BOOSTFLAGS} test.o energy.o -o test
 	./test > boost_test_LOG
@@ -36,5 +38,10 @@ energy.o: energy.cpp energy.h
 test.o: test.cpp
 	${CXX} ${CXXFLAGS} ${BOOSTFLAGS} -c -o test.o test.cpp
 
+# Clean libary files, executables and LOGs
+
 clean: 
-	rm energy.o test.o boost_test_LOG
+	rm energy.o minimize.o main.o main
+
+cleantest: 
+	rm energy.o test.o boost_test_LOG test
