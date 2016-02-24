@@ -1,13 +1,9 @@
 // Natalie Price-Jones Feb 2016
 
-#include <iostream>
-#include <fstream>
-#include <rarray>
-#include <gsl/gsl_roots.h>
-#include "energy.h"
-#include <tuple>
-#include <math.h>
-#include <algorithm>
+#include <iostream> // to write maximum mass load to console
+#include <gsl/gsl_roots.h> // root finding functions
+#include "energy.h" // energy class
+#include <tuple> 
 
 // Function to find a root of given funtion f within in [x_lo,x_hi] to given precision
 double f_min(double x_lo, double x_hi, int maxiter, double precision, energy mass_energy,double (*f)(double, void*)){

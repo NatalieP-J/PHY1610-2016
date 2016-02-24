@@ -35,8 +35,6 @@ int main(){
     // Extract the two roots
     double x_rt_1 = std::get<0>(roots);
     double x_rt_2 = std::get<1>(roots);
-    
-    std::cout << x_rt_1 << " " << x_rt_2 << " " << spring_energy.total_energy(x_rt_1) << " " << spring_energy.total_energy(x_rt_2)<< "\n";
 
     // Check whether both roots exist and write the lowest existing one to file
     // If no roots exist, write that there were no roots file

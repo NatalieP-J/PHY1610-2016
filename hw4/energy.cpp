@@ -1,3 +1,5 @@
+// Natalie Price-Jones Feb 2016
+
 #include <cmath> // pow() function 
 #include <tuple>
 
