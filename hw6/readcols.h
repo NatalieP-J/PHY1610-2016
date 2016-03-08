@@ -12,7 +12,7 @@
 struct data_cols{
   rarray<double,1> time;
   rarray<std::complex<double>,1> signal;
-}
+};
 
 data_cols readcols(std::string directory, std::string fname);
 
