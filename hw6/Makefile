@@ -7,9 +7,9 @@ CXXFLAGS = -std=c++11 -O2 -g
 # Set BOOST flags
 BOOSTFLAGS = -lboost_unit_test_framework
 # Include flags
-INCFLAGS = -I${SCINET_GSL_INC}
+INCFLAGS = -I${SCINET_OPENBLAS_INC}
 # Library flags
-LIBFLAGS = -L${SCINET_GSL_LIB} -lgsl -lgslcblas -lfftw3 
+LIBFLAGS = -L${SCINET_OPENBLAS_LIB} -lgsl -lgslcblas -lfftw3 
 
 all: main
 	echo "This program expects all .rat files to be in directory gwdata"
@@ -23,7 +23,10 @@ main.o: main.cpp
 	${CXX} ${CXXFLAGS} -c main.cpp -o main.o
 
 correlation.o: correlation.cpp
-	${CXX} ${CXXFLAGS} -c correlation.cpp -o correlation.o
+	${CXX} ${CXXFLAGS} ${INCFLAGS} -c correlation.cpp -o correlation.o
 
 readcols.o: readcols.cpp
 	${CXX} ${CXXFLAGS} -c readcols.cpp -o readcols.o
+
+clean:
+	rm main main.o correlation.o readcols.o

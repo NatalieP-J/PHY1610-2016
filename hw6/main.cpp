@@ -14,8 +14,8 @@ int main(){
   std::string fname = "GWprediction.rat";
   
   data_cols cols = readcols(directory,fname);
-    
-  std::cout << "element" << cols.time[0] << cols.signal[0]<<"\n";
-  rarray<std::complex<double>,1> signal_FT = FT(cols.signal); 
 
+  rarray<std::complex<double>,1> powerspec = powerspectrum(cols.signal); 
+
+  std::cout << powerspec[216164] << " " << cols.signal[216164] << "\n";
 }

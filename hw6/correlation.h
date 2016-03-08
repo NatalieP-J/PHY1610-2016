@@ -8,5 +8,6 @@
 #define CORRELATION_H
 
 rarray<std::complex<double>,1> FT(rarray<std::complex<double>,1> signal);
+rarray<std::complex<double>,1> powerspectrum(rarray<std::complex<double>,1> signal);
 
 #endif
