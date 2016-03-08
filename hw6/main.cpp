@@ -1,9 +1,11 @@
 // Natalie Price-Jones Mar 2016
 #include <fstream> 
+#include <iostream>
 #include <rarray> 
 #include <rarrayio> 
 #include <complex> 
 #include "readcols.h"
+#include "correlation.h"
 
 int main(){
 
@@ -13,15 +15,7 @@ int main(){
   
   data_cols cols = readcols(directory,fname);
     
-
-  // open the file 
-  //std::ifstream prediction("gwdata/GWprediction.rat"); 
-  // create empty arrays 
-  //rarray<double,1> ptimes; 
-  //rarray<std::complex<double>,1> psignal; 
-
-  // read in the signal 
-  //prediction >> ptimes; 
-  //prediction >> psignal; 
+  std::cout << "element" << cols.time[0] << cols.signal[0]<<"\n";
+  rarray<std::complex<double>,1> signal_FT = FT(cols.signal); 
 
 }
