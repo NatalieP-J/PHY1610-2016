@@ -15,7 +15,11 @@ int main(){
   
   data_cols cols = readcols(directory,fname);
 
-  rarray<std::complex<double>,1> powerspec = powerspectrum(cols.signal); 
+  rarray<std::complex<double>,1> prediction_FT = FT(cols.signal);
+  rarray<double,1> powerspec = powerspectrum(prediction_FT);
+  double corr = correlate(powerspec,powerspec);
 
-  std::cout << powerspec[216164] << " " << cols.signal[216164] << "\n";
+  
+
+  return 0;
 }

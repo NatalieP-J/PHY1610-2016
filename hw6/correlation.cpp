@@ -6,6 +6,7 @@
 #include <fftw3.h> 
 #include <cblas.h>
 #include <iostream>
+#include <math.h> 
 
 rarray<std::complex<double>,1> FT(rarray<std::complex<double>,1> signal){
   rarray<std::complex<double>,1> signal_FT(signal.size());
@@ -16,15 +17,23 @@ rarray<std::complex<double>,1> FT(rarray<std::complex<double>,1> signal){
   return signal_FT;
 }
 
-rarray<double,1> powerspectrum(rarray<std::complex<double>,1> signal){
-  rarray<std::complex<double>,1> signal_FT = FT(signal);
-  std::cout << signal.size() << " " << signal_FT.size() << "/n";
+rarray<double,1> powerspectrum(rarray<std::complex<double>,1> signal_FT){
   rarray<double,1> powerspectrum(signal_FT.size());
   for (int i=0;i<signal_FT.size();i++) {
       std::complex<double> product = signal_FT[i]*std::conj(signal_FT[i]);
       double real_element = product.real();
       //std::cout << real_element << "\n";
-      powerspectrum[i] = real_element;
+      powerspectrum[i] = product.real();
     }		    
   return powerspectrum;
+}
+
+
+double correlate(rarray<double,1> spec1, rarray<double,1> spec2){
+  double s1s2 = cblas_ddot(spec1.size(),spec1.data(),1,spec2.data(),1);
+  double s1s1 = cblas_ddot(spec1.size(),spec1.data(),1,spec1.data(),1);
+  double s2s2 = cblas_ddot(spec2.size(),spec2.data(),1,spec2.data(),1);
+  double corr = s1s2/sqrt(s1s1*s2s2);
+  return corr;
+  
 }
