@@ -3,6 +3,7 @@
 
 #include <rarray>
 
+
 // perform a single time step for the random walkers
 // pos: the positions of Z walkers. Z=pos.size()
 // N: the number of grid points. All positions should remain between 0
