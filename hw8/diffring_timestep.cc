@@ -29,14 +29,14 @@ void perform_time_step(const rarray<double,2>& F, rarray<double,1>& P)
 // dx: the spatial resolution
 void fill_time_step_matrix(rarray<double,2>& F, double D, double dt, double dx)
 {
+  // calculate the elements of F
+  double off_diagonal = (D*dt)/pow(dx,2);
+  double diagonal = 1 - 2*off_diagonal;
   // F is mostly zeros, so fill with that
   F.fill(0.0);
   // find dimension of (square) F
   int N = F.extent(0);
-  // calculate the elements of F
-  double off_diagonal = (D*dt)/pow(dx,2);
-  double diagonal = 1 - 2*off_diagonal;
-  // fill arrow head through F from the 2nd row 
+  // fill F from the second row.
   for (int i=1; i<N; i++){
     F[i-1][i] = off_diagonal;
     F[i][i] = diagonal;
