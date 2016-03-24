@@ -21,6 +21,7 @@ void perform_time_step(rarray<int,1>& pos, int N, double p)
 {
   int numwalkers = pos.size();
   for (int walker = 0; walker < numwalkers; walker++){
+    // get state randomly distributed between 0 and 1
     double state = uniform(engine);
     // check state to see if you need to move
     if (0.0 <= state and state < p){
@@ -35,7 +36,7 @@ void perform_time_step(rarray<int,1>& pos, int N, double p)
       // move right
       pos[walker] += 1;
       // implement periodicity
-      if (pos[walker] > N){
+      if (pos[walker] >= N){
 	pos[walker] = pos[walker] - N;
       }
     }
