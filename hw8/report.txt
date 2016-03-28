@@ -1,0 +1,39 @@
+# Natalie Price-Jones, Mar 2016
+
+***************** REPORT *******************
+
+Results: I found that ~50,000 walkers gave a decent
+approximation of the PDE solution, without taking an 
+egregious amount of time. 
+
+
+Preferred method: For this problem, even though I found the 
+PDE solving harder to code, I would prefer that for it speed 
+and greater accuracy over the random walker method.
+
+
+What I did: 
+
+walkring_timestep.cc - I initialized a random number
+generator outside the function. The function takes in an array
+of walker positions and updates them according to a 
+probability of movement. For each walker, I got a random number
+from a uniform distribution between 0 and 1. If the number was 
+in [0,p) I moved the walker one index left. If the number was 
+in [p,2p) I moved the walker one index right. If the number was
+in [2p,1) the walker kept its position.
+
+diffring_timestep.cc - This file had two functions.
+perform_time_step -- This function multiplies the two matrices
+F and P. I made a new array, new_P to hold the result of this 
+multiplication, then assigned P to new_P after the multiplication
+was complete. To perform the multiplication, I used clbas_dgemv
+according to its online documentation.
+fill_time_step_matrix -- I closely followed the lecture slides 
+referenced in the assignment. I first calculated the values of the 
+diagonal and off-diagonal elements. Then, I filled the matrix F 
+with zeros, since each updated P_i,j depends only on its two 
+neighbours. I then filled the main diagonal and the two adjacent 
+diagonals from the second row to the last with appropriate values. 
+This left only three values that had to be manually assigned 
+after the loop in order to ensure the periodic boundary conditions.
