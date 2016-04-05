@@ -26,7 +26,6 @@ int main(int argc, char* argv[])
     ierr = MPI_Comm_rank(MPI_COMM_WORLD,&rank);
     ierr = MPI_Comm_size(MPI_COMM_WORLD,&size);
 
-    std::cout << rank << " " << size;
     // Physical parameters
     double  c       = parameter.get<double>("c", 1.0);     // wave speed
     double  tau     = parameter.get<double>("tau", 20.0);  // damping time
@@ -66,6 +65,21 @@ int main(int argc, char* argv[])
     std::cout << "#nper     " << nper    << std::endl;
     std::cout << "#graphics " << int(graphics) << std::endl;
 
+    int local_npnts = (npnts/size)+2; // calculate the number of points (plus guard cells)
+
+    int left_over_npnts = npnts % size;
+
+    std::cout << local_npnts << " " << left_over_npnts << std::endl;
+
+    if (left_over_npnts != 0){
+      for(int assigned_pts = 0; assigned_pts < left_over_npnts; assigned_pts++){
+	if (rank == assigned_pts){
+	  local_npnts ++;
+	}
+      }
+      
+    }
+    
     // Define and allocate arrays.
     rarray<float,1> rho_prev(npnts); // time step t-1
     rarray<float,1> rho(npnts);      // time step t
