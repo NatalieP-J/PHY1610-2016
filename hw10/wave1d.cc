@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
     int local_npnts = (npnts/size)+2; // calculate the number of points (plus guard cells)
 
     int left_over_npnts = npnts % size;
-
+    
     std::cout << local_npnts << " " << left_over_npnts << std::endl;
 
     if (left_over_npnts != 0){
@@ -76,9 +76,33 @@ int main(int argc, char* argv[])
 	if (rank == assigned_pts){
 	  local_npnts ++;
 	}
-      }
-      
+      }  
     }
+
+    double local_x1, local_x2;
+    int left = rank-1;
+    int right = rank+1;
+    int tag = 1;
+    if (rank==0){
+      local_x1 = x1;
+      local_x2 = x1+(local_npnts*dx);
+      ierr = MPI_Send(&local_x2,1,MPI_DOUBLE,right,tag,MPI_COMM_WORLD);
+    }
+
+    if ((rank>0) && (rank<size-1)){
+	ierr = MPI_Recv(&local_x1,1,MPI_DOUBLE,left,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+	local_x1 += dx;
+	local_x2 = local_x1+(local_npnts*dx);
+	ierr = MPI_Send(&local_x2,1,MPI_DOUBLE,right,tag,MPI_COMM_WORLD);
+      }
+
+    if (rank==size-1){
+      ierr = MPI_Recv(&local_x1,1,MPI_DOUBLE,left,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+      local_x1 += dx;
+      local_x2 = x2;
+    }
+
+    std::cout << rank << " " << local_x1 << " " << local_x2 << " " << local_npnts << "\n";
     
     // Define and allocate arrays.
     rarray<float,1> rho_prev(npnts); // time step t-1
