@@ -65,6 +65,7 @@ int main(int argc, char* argv[])
     std::cout << "#nper     " << nper    << std::endl;
     std::cout << "#graphics " << int(graphics) << std::endl;
 
+    int local_ngrid = (ngrid/size);
     int local_npnts = (npnts/size); // calculate the number of points (plus guard cells)
 
     int left_over_npnts = npnts % size;
@@ -83,21 +84,30 @@ int main(int argc, char* argv[])
     int left = rank-1;
     int right = rank+1;
     int tag = 1;
+    int istart,isend;
+    istart = 0;
+    isend = 0;
     if (rank==0){
       local_x1 = x1;
       local_x2 = x1+(local_npnts*dx);
+      isend += local_npnts;
       ierr = MPI_Send(&local_x2,1,MPI_DOUBLE,right,tag,MPI_COMM_WORLD);
+      ierr = MPI_Send(&isend,1,MPI_INT,right,0,MPI_COMM_WORLD);
     }
 
     if ((rank>0) && (rank<size-1)){
 	ierr = MPI_Recv(&local_x1,1,MPI_DOUBLE,left,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+	ierr = MPI_Recv(&istart,1,MPI_INT,left,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 	local_x1 += dx;
 	local_x2 = local_x1+(local_npnts*dx);
+	isend += local_npnts;
 	ierr = MPI_Send(&local_x2,1,MPI_DOUBLE,right,tag,MPI_COMM_WORLD);
+	ierr = MPI_Send(&isend,1,MPI_INT,right,0,MPI_COMM_WORLD);
       }
 
     if (rank==size-1){
       ierr = MPI_Recv(&local_x1,1,MPI_DOUBLE,left,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+      istart = MPI_Recv(&istart,1,MPI_INT,left,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
       local_x1 += dx;
       local_x2 = x2;
     }
@@ -111,20 +121,24 @@ int main(int argc, char* argv[])
     rarray<float,1> rho_next(local_npnts); // time step t+1
     rarray<float,1> rho_init(local_npnts); // initial values
     rarray<float,1> x(local_npnts);        // x values
- 
-    // Initialize.
-    for (int i = 0; i < npnts; i++) {
-        x[i] = x1 + ((i-1)*(x2-x1))/ngrid; 
-        rho[i] = 0.0;
-        rho_prev[i] = 0.0;
-        rho_next[i] = 0.0;
-    }
 
-    // Excite.
-    for (int i = npnts/4 + 1; i < 3*npnts/4; i++) {
-        rho[i] = 0.25 - fabs(float(i-npnts/2)/float(npnts));
-        rho_prev[i] = rho[i];
-        rho_init[i] = rho[i];
+    int global_i;
+    // Initialize. Start in the right place and Don't fill guard cells
+    for (int i = 1; i < (local_npnts-1); i++) {
+      // i-1 -> i-2 to make sure what would be x[0] -> x[1] to preserve the guard cell
+      global_i = istart+i
+      x[i] = x1 + ((global_i-2)*(x2-x1))/ngrid;
+      rho[i] = 0.0;
+      rho_prev[i] = 0.0;
+      rho_next[i] = 0.0;
+      // if local index in appropriate global range, excite
+      if (global_i>(npnts/4)+1 && (global_i<3*npnts/4)){
+	rho[i] = 0.25 - fabs(float((global_i-1)-npnts/2)/float(npnts));
+	rho_prev[i] = rho[i];
+	rho_init[i] = rho[i];
+	  
+			     
+      }
     }
        
     // Plot or Write out data.
