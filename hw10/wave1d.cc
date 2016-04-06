@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     std::cout << "#nper     " << nper    << std::endl;
     std::cout << "#graphics " << int(graphics) << std::endl;
 
-    int local_npnts = (npnts/size)+2; // calculate the number of points (plus guard cells)
+    int local_npnts = (npnts/size); // calculate the number of points (plus guard cells)
 
     int left_over_npnts = npnts % size;
     
@@ -102,14 +102,15 @@ int main(int argc, char* argv[])
       local_x2 = x2;
     }
 
+    local_npnts+=2;
     std::cout << rank << " " << local_x1 << " " << local_x2 << " " << local_npnts << "\n";
     
     // Define and allocate arrays.
-    rarray<float,1> rho_prev(npnts); // time step t-1
-    rarray<float,1> rho(npnts);      // time step t
-    rarray<float,1> rho_next(npnts); // time step t+1
-    rarray<float,1> rho_init(npnts); // initial values
-    rarray<float,1> x(npnts);        // x values
+    rarray<float,1> rho_prev(local_npnts); // time step t-1
+    rarray<float,1> rho(local_npnts);      // time step t
+    rarray<float,1> rho_next(local_npnts); // time step t+1
+    rarray<float,1> rho_init(local_npnts); // initial values
+    rarray<float,1> x(local_npnts);        // x values
  
     // Initialize.
     for (int i = 0; i < npnts; i++) {
