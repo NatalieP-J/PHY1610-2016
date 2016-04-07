@@ -98,14 +98,14 @@ int main(int argc, char* argv[])
 	ierr = MPI_Recv(&istart,1,MPI_INT,left,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 	local_x1 += dx;
 	local_x2 = local_x1+(local_npnts*dx);
-	isend += local_npnts;
+	isend = istart + local_npnts;
 	ierr = MPI_Send(&local_x2,1,MPI_DOUBLE,right,tag,MPI_COMM_WORLD);
 	ierr = MPI_Send(&isend,1,MPI_INT,right,0,MPI_COMM_WORLD);
       }
 
     if ((rank==size-1) && (rank!=0)){
       ierr = MPI_Recv(&local_x1,1,MPI_DOUBLE,left,tag,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
-      istart = MPI_Recv(&istart,1,MPI_INT,left,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
+      ierr = MPI_Recv(&istart,1,MPI_INT,left,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
       local_x1 += dx;
       local_x2 = x2;
     }
