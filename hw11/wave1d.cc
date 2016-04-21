@@ -103,14 +103,30 @@ int main(int argc, char* argv[])
        cpgline(npnts, x.data(), rho.data());
        cpgsls(2); cpgslw(12); cpgsci(red);
        cpgline(npnts, x.data(), &rho_init[0]);
-    } else {     
-       dataFile.open(dataFilename.c_str());
-       dataFile << nper << ","   
-                << npnts       << "\n";
-       dataFile << time << "\n";
-       for (int i = 0; i < npnts; i++ ) 
+    } else {
+      //if (writetype == false){
+	dataFile.open(dataFilename.c_str());
+	dataFile << nper << ","   
+		 << npnts       << "\n";
+	dataFile << time << "\n";
+	for (int i = 0; i < npnts; i++ ) 
           dataFile << x[i] << " " << rho[i] << " \n";  
-       dataFile << "\n";
+	dataFile << "\n";
+	//}
+      if (writetype == true){
+	int fileid, rhoid,xid,tid, status, posdim[1],timedim[1],rhodim[2];
+	status = nc_create(dataFilename.c_str(), NC_NETCDF4, &fileid);
+	status = nc_def_dim(fileid,"x",ngrid,&rhodim[0]);
+	status = nc_def_dim(fileid,"x",ngrid,&posdim[0]);
+	status = nc_def_dim(fileid,"t",nsteps,&rhodim[1]);
+	status = nc_def_dim(fileid,"t",nsteps,&timedim[0]);
+	status = nc_def_var(fileid,"pos",NC_FLOAT,1,posdim,&xid);
+	status = nc_def_var(fileid,"time",NC_DOUBLE,1,timedim,&tid);
+	status = nc_def_var(fileid,"rho",NC_FLOAT,2,rhodim,&rhoid);
+	status = nc_enddef(fileid);
+	status = nc_put_var_float(fileid,xid,x.data());
+	status = nc_close(fileid);
+      }
     }
      
     // measure time
