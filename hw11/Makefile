@@ -9,10 +9,10 @@
 
 
 CXX=g++
-CPPFLAGS=-I${SCINET_PGPLOT_INC}
+CPPFLAGS=-I${SCINET_PGPLOT_INC} -I${SCINET_NETCDF_INC}
 CXXFLAGS=-g -O0 -std=c++0x
-LDLIBS=-lcpgplot -lpgplot -lX11 -lgfortran -lpng 
-LDFLAGS=-L${SCINET_PGPLOT_LIB}
+LDLIBS=-lcpgplot -lpgplot -lX11 -lgfortran -lpng -lnetcdf
+LDFLAGS=-L${SCINET_PGPLOT_LIB} -L${SCINET_NETCDF_LIB}
 
 all: wave1d
 

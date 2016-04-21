@@ -6,3 +6,5 @@ runtime = 150.0
 dx = 0.01
 outtime = 0.04
 graphics = 0
+writetype = 1
+outname = dataFile.nc

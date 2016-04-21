@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <rarray>
 #include <cpgplot.h>
+#include "netcdf.h"
 #include "ticktock.h"
 #include "inifile.h"
 
@@ -33,8 +34,11 @@ int main(int argc, char* argv[])
 
     bool    graphics = parameter.get<bool>("graphics", true);   // output to graphics (with 1 sec delay)  or to a file?
 
+    bool    writetype = parameter.get<bool>("writetype",true); // if true, write to netcdf file
+    
     // Output file name
-    const std::string dataFilename = "dataFilename.out";
+    const std::string dataFilename = parameter.get<std::string>("outname","dataFile.nc");
+    
 
     // Derived parameters
     int     ngrid   = (x2-x1)/dx;  // number of x points
