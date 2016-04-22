@@ -1,0 +1,6 @@
+ASCII vs netcdf
+
+My brief comparison of ASCII vs netcdf. First, the runtime with netcdf is significantly
+faster. With ASCII writeout, the code takes about 38s to run, but with netcdf writeout was 
+nearly six times faster, averaging around 6.2s. The netcdf file is also much smaller, at 5.4K,
+tiny compared to the 314M file produced by the ASCII writeout.

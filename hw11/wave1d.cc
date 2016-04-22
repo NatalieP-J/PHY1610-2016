@@ -66,6 +66,7 @@ int main(int argc, char* argv[])
     rarray<float,1> rho_next(npnts); // time step t+1
     rarray<float,1> rho_init(npnts); // initial values
     rarray<float,1> x(npnts);        // x values
+    rarray<double,1> writetime(nsteps); // t values
     double time;                     // current time
  
     // Initialize.
@@ -85,13 +86,11 @@ int main(int argc, char* argv[])
     }
        
     // Plot or Write out data.
-    //std::ofstream dataFile;
+    //initialize variables for netcdf
     int fileid, rhoid,xid,tid, status, posdim[1],timedim[1],rhodim[2];
 
     int rind = 0;
-    int tind = 0;
     size_t rholen = (x2-x1)/dx;
-    size_t tlen = 1;
 
     int red, grey, white;
     if (graphics) {
@@ -109,16 +108,21 @@ int main(int argc, char* argv[])
        cpgsls(2); cpgslw(12); cpgsci(red);
        cpgline(npnts, x.data(), &rho_init[0]);
     } else {
+      // create file
 	status = nc_create(dataFilename.c_str(), NC_CLOBBER|NC_NETCDF4, &fileid);
+	// define dimensions
 	status = nc_def_dim(fileid,"x",ngrid,&rhodim[0]);
 	status = nc_def_dim(fileid,"x",ngrid,&posdim[0]);
 	status = nc_def_dim(fileid,"t",nsteps,&rhodim[1]);
 	status = nc_def_dim(fileid,"t",nsteps,&timedim[0]);
+	// define variables
 	status = nc_def_var(fileid,"pos",NC_FLOAT,1,posdim,&xid);
 	status = nc_def_var(fileid,"time",NC_DOUBLE,1,timedim,&tid);
 	status = nc_def_var(fileid,"rho",NC_FLOAT,2,rhodim,&rhoid);
 	status = nc_enddef(fileid);
+	// write position
 	status = nc_put_var_float(fileid,xid,x.data());
+	// write first row of rho information
 	size_t ri = rind;
 	status = nc_put_vara_float(fileid,rhoid,&ri,&rholen,rho.data());
 	rind += ngrid;
@@ -131,7 +135,7 @@ int main(int argc, char* argv[])
 
     // Take timesteps
     for (int s = 0; s < nsteps; s++) {
-
+      writetime[s] = time;
         // Set zero dirichlet boundary conditions
         rho[0] = 0.0;
         rho[ngrid+1] = 0.0;
@@ -167,6 +171,7 @@ int main(int argc, char* argv[])
               cpgebuf();
               sleep(1); // artificial delay! 
            } else {
+	     // write next row of rho information
 	     size_t ri = rind;
 	     status = nc_put_vara_float(fileid,rhoid,&ri,&rholen,rho.data());
 	     rind += ngrid;
@@ -179,6 +184,8 @@ int main(int argc, char* argv[])
 
     // Close file.
     if (not graphics)
+      // write time information
+      status = nc_put_var_double(fileid,tid,writetime.data());
       status = nc_close(fileid);
     return 0;
 }
