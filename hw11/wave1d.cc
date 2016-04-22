@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstddef>
 #include <cmath>
 #include <unistd.h>
 #include <rarray>
@@ -34,8 +35,6 @@ int main(int argc, char* argv[])
 
     bool    graphics = parameter.get<bool>("graphics", true);   // output to graphics (with 1 sec delay)  or to a file?
 
-    bool    writetype = parameter.get<bool>("writetype",true); // if true, write to netcdf file
-    
     // Output file name
     const std::string dataFilename = parameter.get<std::string>("outname","dataFile.nc");
     
@@ -86,9 +85,15 @@ int main(int argc, char* argv[])
     }
        
     // Plot or Write out data.
-    std::ofstream dataFile;
-    int red, grey, white;
+    //std::ofstream dataFile;
+    int fileid, rhoid,xid,tid, status, posdim[1],timedim[1],rhodim[2];
 
+    int rind = 0;
+    int tind = 0;
+    size_t rholen = (x2-x1)/dx;
+    size_t tlen = 1;
+
+    int red, grey, white;
     if (graphics) {
        cpgbeg(0, "/xwindow", 1, 1);
        cpgask(0);
@@ -104,18 +109,7 @@ int main(int argc, char* argv[])
        cpgsls(2); cpgslw(12); cpgsci(red);
        cpgline(npnts, x.data(), &rho_init[0]);
     } else {
-      //if (writetype == false){
-	dataFile.open(dataFilename.c_str());
-	dataFile << nper << ","   
-		 << npnts       << "\n";
-	dataFile << time << "\n";
-	for (int i = 0; i < npnts; i++ ) 
-          dataFile << x[i] << " " << rho[i] << " \n";  
-	dataFile << "\n";
-	//}
-      if (writetype == true){
-	int fileid, rhoid,xid,tid, status, posdim[1],timedim[1],rhodim[2];
-	status = nc_create(dataFilename.c_str(), NC_NETCDF4, &fileid);
+	status = nc_create(dataFilename.c_str(), NC_CLOBBER|NC_NETCDF4, &fileid);
 	status = nc_def_dim(fileid,"x",ngrid,&rhodim[0]);
 	status = nc_def_dim(fileid,"x",ngrid,&posdim[0]);
 	status = nc_def_dim(fileid,"t",nsteps,&rhodim[1]);
@@ -125,14 +119,16 @@ int main(int argc, char* argv[])
 	status = nc_def_var(fileid,"rho",NC_FLOAT,2,rhodim,&rhoid);
 	status = nc_enddef(fileid);
 	status = nc_put_var_float(fileid,xid,x.data());
-	status = nc_close(fileid);
-      }
+	size_t ri = rind;
+	status = nc_put_vara_float(fileid,rhoid,&ri,&rholen,rho.data());
+	rind += ngrid;
     }
      
     // measure time
     TickTock tt;
     tt.tick();
     
+
     // Take timesteps
     for (int s = 0; s < nsteps; s++) {
 
@@ -171,11 +167,10 @@ int main(int argc, char* argv[])
               cpgebuf();
               sleep(1); // artificial delay! 
            } else {
-              dataFile << time << "\n";
-              for (int i = 0; i < npnts; i++ ) 
-                 dataFile<< x[i] << " " << rho[i] << "\n"; 
-              dataFile << "\n";
-           } 
+	     size_t ri = rind;
+	     status = nc_put_vara_float(fileid,rhoid,&ri,&rholen,rho.data());
+	     rind += ngrid;
+	   } 
         }
     }
     
@@ -184,7 +179,6 @@ int main(int argc, char* argv[])
 
     // Close file.
     if (not graphics)
-       dataFile.close();
-    
+      status = nc_close(fileid);
     return 0;
 }
